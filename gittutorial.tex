@@ -216,6 +216,8 @@ Hinweis: der \textit{.git}-Ordner, welcher hier ausgegeben wird, ist auf macOS e
 
 \subsection{File dem \textit{lokalen} Verzeichnis hinzufügen}\label{ch:push}
 
+\subsubsection{\textit{add}-Befehl}
+
 Wenn nun ein File geschrieben wird (alle möglichen Files mit Text sind meines Wissens nach denkbar), wird dieses vorerst lokal im File system gespeichert (vgl. Abbildung \ref{abb:areas}). Um dieses File später dem Git-Verzeichnis hinzu fügen zu können, muss dieses File vorerst in die \textit{staging area} übertragen werden (Abbildung \ref{abb:areas}; im Tutorial, von welchem ich hier viele Infos übernehme, heisst dieses Level \textit{staging area}, keine Ahnung, ob dies ein allgemein gülitger Begriff ist). Folglich werden später nicht alle Files, welche im ursprünglichen Verzeichnis (hier: \textit{Git$\_$Tutorial}) gespeichert sind, im \textit{commit}-Schritt (Kapitel \ref{ch:commit}) ins Git-Verzeichnis übertragen.
 
 \begin{figure*}[!tbph]
@@ -228,7 +230,40 @@ Wenn nun ein File geschrieben wird (alle möglichen Files mit Text sind meines W
 }
 \end{figure*}
 
+\noindent
 Files werden über den \textit{add}-Befehl der staging area hinzugefügt:
+
+\begin{lstlisting}
+git add FILENAME
+\end{lstlisting}
+
+\noindent
+Über den \textit{status}-Befehl kann überprüft werden, welche Files geadded wurden (Abbildung \ref{abb:statusabfrageadd}).
+
+\begin{figure*}[!tbph]
+\makebox[\textwidth][c]{\begin{minipage}[c]{\textwidth}
+\centering
+\includegraphics[height=4cm]{./preadd.png}\label{abb:pre}
+\includegraphics[height=4cm]{./postadd.png}\label{abb:post} \caption[]{Statusinformation über geaddete Files vor (links) und nachdem (rechts) das File gittutorial.tex der staging-area hinzugefügt wurde.}
+\label{abb:statusabfrageadd}
+\end{minipage}
+}
+\end{figure*}
+
+
+\subsubsection{\textit{commit}-Befehl} \label{ch:commit}
+
+Schliesslich muss das File jetzt noch ins Repo committed werden, was über den Befehl \textit{commit} geschieht:
+
+\begin{lstlisting}
+git commit -m "message"
+\end{lstlisting}
+
+Über diesen Befehl werden die Files in der staging-area nun ins lokale Repo übertragen. -m \glqq message\grqq wird dabei verwendet, um einen Hinweis zu geben bezüglich der Änderungen, welche vorgenommen wurden gegenüber der Vorversion (und ist glaubs zwingend).\newline
+\par
+\noindent
+Über die Statusabfrage kann nun überprüft werden, welche Files im Repository modifiziert wurden.
+
 
 \subsection{Files auf Server pushen}\label{ch:push}
 %----------------------------------------------------------------------------------------
