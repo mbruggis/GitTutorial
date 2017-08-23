@@ -334,7 +334,19 @@ Ich denke mal, master bezeichnet hier den Branch, auf den gepushed wird. Aber hi
 
 \subsection{Weiteres Vorgehen}
 
-Um nun ein bearbeitetes File wieder hochzuladen, wiederholt man einfach \textit{commit} (um die Änderungen zu sichern) und \textit{push} (um die Änderungen hochzuladen).
+Um nun ein bearbeitetes File wieder hochzuladen, wiederholt man einfach \textit{add} (sehr wichtig, da die Änderungen zuerst in die staging-area übertragen werden müssen! Wird dieser Schritt nicht ausgeführt, weiss Git gar nicht, was verändert wurde am File im lokalen File system), \textit{commit} (um die Änderungen in die staging area zu übernehmen) und \textit{push} (um die Änderungen hochzuladen).\par
+Den Verlauf eines Files kann man schliesslich auch auf Github grafisch anschauen, indem man ein File anklickt (öffnet) und sich dann die History anzeigen lässt (Abbildung \ref{abb:history}). Hier erscheinen dann auch (die hier nicht sehr sinnvollen) messages, welche beim committen mitgegeben werden.\par
+Der grosse Vorteil hier ist dann, dass man keine alten Versionen mehr verliert, weil man immer Zugriff auf die älteren committeten Versionen hat! Also immer schön committen, Kinder :-).
+
+\begin{figure*}[!tbph]
+\makebox[\textwidth][c]{\begin{minipage}[c]{\textwidth}
+\centering
+\includegraphics[height=7cm]{./history.png}
+ \caption[]{Die unterschiedlichen Versionen eines Files inklusive der Kommentare bezüglich den Veränderungen aus dem commit-Schritt lassen sich anzeigen.}
+\label{abb:history}
+\end{minipage}
+}
+\end{figure*}
 
 %----------------------------------------------------------------------------------------
 %	REFERENCE LIST
