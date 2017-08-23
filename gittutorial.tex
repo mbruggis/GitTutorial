@@ -158,7 +158,7 @@ git config --global user.email@email.com
 \end{lstlisting}
 
 
-\subsection{Repo erstellen}
+\subsection{Repository auf Server erstellen}\label{ch:gitRepo}
 
 Nun muss man ein Repository (Repo) in Github erstellen, in welches später die Files übertragen (pushed) werden sollen. Dieses Repo ist somit der Ordner auf einem Server, über den jeweils die Änderungen synchronisiert werden (Kapitel \ref{ch:push}). Alle Projektmitarbeiter haben folglich Zugriff auf dieses Repo. \par
 Das Repo erstelle ich immer online (auf der Homepage von Github), weiss nicht, ob dies auch über das Terminal möglich wäre oder über das Github-GUI zum runterladen.
@@ -231,11 +231,22 @@ Wenn nun ein File geschrieben wird (alle möglichen Files mit Text sind meines W
 \end{figure*}
 
 \noindent
-Files werden über den \textit{add}-Befehl der staging area hinzugefügt:
+Files werden über den \textit{add}-Befehl der staging area hinzugefügt (Abbildung \ref{abb:add}):
 
 \begin{lstlisting}
 git add FILENAME
 \end{lstlisting}
+
+\begin{figure*}[!tbph]
+\makebox[\textwidth][c]{\begin{minipage}[c]{\textwidth}
+\centering
+\includegraphics[height=6cm]{./add.png}
+ \caption[]{Der add-Befehl fügt ein file der staging-area hinzu.}
+\label{abb:add}
+\end{minipage}
+}
+\end{figure*}
+
 
 \noindent
 Über den \textit{status}-Befehl kann überprüft werden, welche Files geadded wurden (Abbildung \ref{abb:statusabfrageadd}).
@@ -259,13 +270,72 @@ Schliesslich muss das File jetzt noch ins Repo committed werden, was über den B
 git commit -m "message"
 \end{lstlisting}
 
-Über diesen Befehl werden die Files in der staging-area nun ins lokale Repo übertragen. -m \glqq message\grqq wird dabei verwendet, um einen Hinweis zu geben bezüglich der Änderungen, welche vorgenommen wurden gegenüber der Vorversion (und ist glaubs zwingend).\newline
+Über diesen Befehl werden die Files in der staging-area nun ins lokale Repo übertragen (Abbildung \ref{abb:commit}). -m \glqq message\grqq wird dabei verwendet, um einen Hinweis zu geben bezüglich der Änderungen, welche vorgenommen wurden gegenüber der Vorversion (und ist glaubs zwingend).\newline
 \par
 \noindent
 Über die Statusabfrage kann nun überprüft werden, welche Files im Repository modifiziert wurden.
 
+\begin{figure*}[!tbph]
+\makebox[\textwidth][c]{\begin{minipage}[c]{\textwidth}
+\centering
+\includegraphics[height=6cm]{./commit.png}
+ \caption[]{Der commit-Befehl überträgt die Files in der staging-area ins Repository, welches später mit dem Server synchronisiert wird.}
+\label{abb:commit}
+\end{minipage}
+}
+\end{figure*}
 
-\subsection{Files auf Server pushen}\label{ch:push}
+
+\subsubsection{File ändern und Änderungen anzeigen}
+
+Wenn nun ein File im lokalen Ordner (file system) geändert wird, kann man sich die Änderungen gegenüber der Version im Repo anzeigen lassen. Dazu verwendet man den \textit{git diff}-Befehl. Dieser zeigt dann an, welche Zeilen im Text-File abgeändert wurden (Abbildung \ref{abb:diffs}).
+
+\begin{figure*}[!tbph]
+\makebox[\textwidth][c]{\begin{minipage}[c]{\textwidth}
+\centering
+\includegraphics[height=6cm]{./diffs.png}
+ \caption[]{Im Terminal wird angezeigt, welche Zeilen im Dokument geändert wurden gegenüber dem File im Repository.}
+\label{abb:diffs}
+\end{minipage}
+}
+\end{figure*}
+
+\subsection{Files in Repository auf dem Server übertragen}\label{ch:push}
+
+Im letzten Schritt werden die Files aus dem lokalen Repo ins Repo auf dem Server gepushed. Dazu sind die Informationen erforderlich, welche nach dem Erstellen des Repos auf Github (Kapitel \ref{ch:gitRepo}). angegeben werden (für unser Beispiel in Abbildung \ref{abb:instructions}).
+
+\begin{figure*}[!tbph]
+\makebox[\textwidth][c]{\begin{minipage}[c]{\textwidth}
+\centering
+\includegraphics[height=7cm]{./instructions.png}
+ \caption[]{Im Terminal wird angezeigt, welche Zeilen im Dokument geändert wurden gegenüber dem File im Repository.}
+\label{abb:instructions}
+\end{minipage}
+}
+\end{figure*}
+
+\subsubsection{Lokales Repo mit Repo auf dem Server verknüpfen}
+
+Zuerst müssen das Repo auf dem lokalen Rechner (vgl. Abbildung \ref{abb:areas}) mit demjenigen auf dem Server (erstellt wie in Kapitel \ref{ch:gitRepo} gezeigt) verknüpft werden. Dazu ist der Link notwenig, welcher durch Github angegeben wird (Abbildung \ref{abb:instructions}):
+
+\begin{lstlisting}
+git remote add origin https://github.com/mbruggis/GitTutorial.git
+\end{lstlisting}
+
+\subsubsection{Files auf Server pushen}
+Der letzte Schritt besteht nun darin, die Files hochzuladen. Dies geschieht über den \textit{push}-Befehl und ist auch bereits in Abbildung \ref{abb:instructions} aufgezeigt:
+
+
+\begin{lstlisting}
+git push -u origin master
+\end{lstlisting}
+
+Ich denke mal, master bezeichnet hier den Branch, auf den gepushed wird. Aber hier bin ich noch nicht so bewandert ;-).
+
+\subsection{Weiteres Vorgehen}
+
+Um nun ein bearbeitetes File wieder hochzuladen, wiederholt man einfach \textit{commit} (um die Änderungen zu sichern) und \textit{push} (um die Änderungen hochzuladen).
+
 %----------------------------------------------------------------------------------------
 %	REFERENCE LIST
 %----------------------------------------------------------------------------------------
