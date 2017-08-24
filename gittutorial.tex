@@ -323,8 +323,7 @@ git remote add origin https://github.com/mbruggis/GitTutorial.git
 \end{lstlisting}
 
 \subsubsection{Files auf Server pushen}
-Der letzte Schritt besteht nun darin, die Files hochzuladen. Dies geschieht über den \textit{push}-Befehl und ist auch bereits in Abbildung \ref{abb:instructions} aufgezeigt:
-
+Der letzte Schritt besteht nun darin, die lokal gespeicherten Files auf den Server hochzuladen (vgl. Abbildung \ref{abb:serveroverview}). Dies geschieht über den \textit{push}-Befehl und ist auch bereits in Abbildung \ref{abb:instructions} aufgezeigt:
 
 \begin{lstlisting}
 git push -u origin master
@@ -332,9 +331,30 @@ git push -u origin master
 
 Ich denke mal, master bezeichnet hier den Branch, auf den gepushed wird. Aber hier bin ich noch nicht so bewandert ;-).
 
+\begin{figure*}[!tbph]
+\makebox[\textwidth][c]{\begin{minipage}[c]{\textwidth}
+\centering
+\includegraphics[height=7cm]{./serverOverview.png}
+ \caption[]{Überblick über die Befehle, um die Files im lokalen Git-Repo auf den Server hochzuladen und umgekehrt.}
+\label{abb:serveroverview}
+\end{minipage}
+}
+\end{figure*}
+
+\subsubsection{Änderungen vom Server übernehmen}
+
+Hat jemand anderes ein File im Repo auf dem Server verändert, muss die aktuelle Version zuerst übernommen werden, um spätere Konflikte zu vermeiden. Dies geschieht über den \textit{pull}-Befehl:
+
+\begin{lstlisting}
+git pull
+\end{lstlisting}
+
+Allerdings konnte ich dies noch nicht austesten, da ich ja bisher immer nur alleine an den Projekten gearbeitet habe...
+
+
 \subsection{Weiteres Vorgehen}
 
-Um nun ein bearbeitetes File wieder hochzuladen, wiederholt man einfach \textit{add} (sehr wichtig, da die Änderungen zuerst in die staging-area übertragen werden müssen! Wird dieser Schritt nicht ausgeführt, weiss Git gar nicht, was verändert wurde am File im lokalen File system), \textit{commit} (um die Änderungen in die staging area zu übernehmen) und \textit{push} (um die Änderungen hochzuladen).\par
+Um ein bearbeitetes File wieder hochzuladen, wiederholt man einfach \textit{add} (sehr wichtig, da die Änderungen zuerst in die staging-area übertragen werden müssen! Wird dieser Schritt nicht ausgeführt, weiss Git gar nicht, was verändert wurde am File im lokalen File system), \textit{commit} (um die Änderungen in die staging area zu übernehmen) und \textit{push} (um die Änderungen hochzuladen).\par
 Den Verlauf eines Files kann man schliesslich auch auf Github grafisch anschauen, indem man ein File anklickt (öffnet) und sich dann die History anzeigen lässt (Abbildung \ref{abb:history}). Hier erscheinen dann auch (die hier nicht sehr sinnvollen) messages, welche beim committen mitgegeben werden.\par
 Der grosse Vorteil hier ist dann, dass man keine alten Versionen mehr verliert, weil man immer Zugriff auf die älteren committeten Versionen hat! Also immer schön committen, Kinder :-).
 
@@ -348,6 +368,17 @@ Der grosse Vorteil hier ist dann, dass man keine alten Versionen mehr verliert, 
 }
 \end{figure*}
 
+\subsubsection{Wichtige Überlegungen}
+
+Folgende zwei wichtigen Punkte werden in richtigen Projekten mit mehreren Beteiligten auftreten:
+
+\begin{itemize}
+  \item Konflikte
+  \item Zusammenführen von Branches
+\end{itemize}
+
+Wie das genau läuft, weiss ich jetzt auch nicht. Ihr könnt mein Dokument jedoch gerne weiter bearbeiten :-).
+
 %----------------------------------------------------------------------------------------
 %	REFERENCE LIST
 %----------------------------------------------------------------------------------------
@@ -357,10 +388,10 @@ Der grosse Vorteil hier ist dann, dass man keine alten Versionen mehr verliert, 
 %\bibliographystyle {physGG6}
 %\newpage
 
-%\bibliographystyle {model5-names}
-%\bibliography {LiteratureRP.bib}
-%\input{Appendix.tex}
-%\bibliography {Concept_Literature.bib}
+%\bibliographystyle{model5-names}
+%\bibliography{lit}
+
+
 %\end{thebibliography}
 
 %----------------------------------------------------------------------------------------
