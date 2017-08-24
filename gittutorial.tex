@@ -123,17 +123,17 @@
 
 \section{Einleitung}
 
-Eine Möglichkeit für Version Control ist Git. Hier zeige ich eine sehr einfaches Beispiel anhand von Github. Da ich aber auch noch nicht viel Ahnung habe von all den Möglichkeiten, die Git bietet, beschränke ich mich hier auf die ganz grundsätzlichen Möglichkeiten, sprich: ich zeige, wie man ein Repo (repository) auf einem Server erzeugt, lokal ein File bearbeitet und sichert (in einem lokalen Repo, d.h. hier dann einfach ein Ordner), und wie man das File im lokalen Repo dann ins Repo auf dem Server pushed. \par
-In diesem Tutorial konzentriere ich mich auf ein Vorgehen basierend auf dem Terminal von Linux/Mac, für Windows sollte dies jedoch genau gleich funktionieren. Kann's nur gerade nicht überprüfen. Gewisse IDEs bieten aber auch bereits implementierte, grafische Git-Anbindungen, so (meines Wissens nach) PyCharm oder Atom. Diese Möglichkeiten hab ich aber bisher nicht verwendet.\par
+Eine Möglichkeit für Version Control ist Git. Hier zeige ich ein sehr einfaches Beispiel anhand von Github. Ende des Dokuments hab ich ein tex-File erstellt und in ein Repo auf dem Github-Server hochgeladen, welches ihr gerne herunterladen und ergänzen dürft. Da ich noch nicht viel Ahnung habe von all den Möglichkeiten, die Git bietet, beschränke ich mich hier auf die ganz grundsätzlichen Möglichkeiten, sprich: ich zeige, wie man ein Repo (repository) auf einem Server erzeugt, lokal ein File bearbeitet und sichert (in einem lokalen Repo, d.h. hier dann einfach ein Ordner), und wie man das File im lokalen Repo ins Repo auf dem Server pushed. \par
+In diesem Tutorial konzentriere ich mich auf ein Vorgehen basierend auf dem Terminal von Linux/Mac, für Windows sollte dies jedoch genau gleich funktionieren (würde mich wunder nehmen, kann's nämlich gerade nicht überprüfen). Gewisse IDEs bieten aber auch bereits implementierte, grafische Git-Anbindungen, so (meines Wissens nach) PyCharm oder Atom. Diese Möglichkeiten hab ich aber bisher nicht verwendet (bzw. hab ich in PyCharm mal aus Unerfahrenheit ein Repo ganz böss an Arsch gemacht und dann sein lassen).\par
 Weiter zeige ich das Vorgehen hier für Github, weil man damit einen Gratisaccount erstellen kann, wenn dieser dann auch öffentlich ist. Github bietet zudem ein GUI, allerdings bietet die Github-Homepage die selben Funktionen auch. \par
 Alternativ zu Github kann man Git auch auf einem eigenen Server laufen lassen, wenn man denn einen hat. Die Befehle sollten meines Wissens nach auch hier die selben sein, da Git quasi eine Befehlssprache vorgibt.
 \newline
 \par
-Da ich weiterhin noch keine Erfahrung mit Branches etc. habe (sind meinem Verständnis nach alternative \glqq Zweige\grqq (Branches) in der Versionierung eines Scripts, die dazu dienen, zusätzliche Funktionen in die Funktionalität eines Programms einzubauen, ohne die ursprüngliche Version an den Arsch zu machen, auf die man dann aber später zurückgreifen kann, solle man mit den erweiterten Funktionen zufrieden sein), lass ich das hier mal bleiben. Wichtig ist dann nur, dass wir hier immer auf dem Master-Branch arbeiten.
+Da ich weiterhin noch keine Erfahrung mit Branches etc. habe (sind meinem Verständnis nach alternative \glqq Zweige\grqq (Branches) in der Versionierung eines Scripts, die dazu dienen, zusätzliche Funktionen in die Funktionalität eines Programms einzubauen, ohne die ursprüngliche Version an Arsch zu machen, auf die man dann aber später zurückgreifen kann, solle man mit den erweiterten Funktionen zufrieden sein), lass ich das hier mal bleiben. Wichtig ist dann nur, dass wir hier immer auf dem Master-Branch arbeiten.
 
 \subsection{Hilfestellungen zu Git-Befehlen}
 
-Tutorials und Erklärungen zu den git-Befehlen findet man über folgende Terminal-Befehle:
+Tutorials und Erklärungen zu den Git-Befehlen findet man über folgende Terminal-Befehle:
 
 \begin{lstlisting}
 man git
@@ -161,7 +161,7 @@ git config --global user.email@email.com
 \subsection{Repository auf Server erstellen}\label{ch:gitRepo}
 
 Nun muss man ein Repository (Repo) in Github erstellen, in welches später die Files übertragen (pushed) werden sollen. Dieses Repo ist somit der Ordner auf einem Server, über den jeweils die Änderungen synchronisiert werden (Kapitel \ref{ch:push}). Alle Projektmitarbeiter haben folglich Zugriff auf dieses Repo. \par
-Das Repo erstelle ich immer online (auf der Homepage von Github), weiss nicht, ob dies auch über das Terminal möglich wäre oder über das Github-GUI zum runterladen.
+Das Repo erstelle ich immer online (auf der Homepage von Github), weiss nicht, ob dies auch über das Terminal möglich wäre (wäre ja sicher möglich...) oder über das Github-GUI zum runterladen.
 
 \begin{figure*}[!tbph]
 \makebox[\textwidth][c]{\begin{minipage}[c]{\textwidth}
@@ -177,14 +177,14 @@ Das Repo erstelle ich immer online (auf der Homepage von Github), weiss nicht, o
 In diesem Fall heisst das Repo ganz offensichtlich GitTutorial.
 
 \subsection{Lokalen Ordner erstellen}
-Parallel zum Repo auf Github, wird ein lokaler Ordner benötigt, in welchen die zu bearbeitenden Files jeweils gespeichert werden, bevor sie wieder auf den Server hochgeladen werden. Freaks machen dies bekanntlich ja über
+Parallel zum Repo auf Github, wird ein lokaler Ordner benötigt, in welchen die zu bearbeitenden Files jeweils gespeichert werden (sprich: ein ganz normaler Ordner, in dem ihr die Files abspeichert), bevor sie wieder auf den Github-Server hochgeladen werden. Freaks machen dies bekanntlich ja über
 
 \begin{lstlisting}
 mkdir path/to/project/project
 \end{lstlisting}
 
 \noindent
-, wichtig hier ist einfach, dass man übers Terminal in dieses Verzeichnis geht:
+, wichtig hier ist einfach, dass man übers Terminal in dieses Verzeichnis navigiert, bevor man das Git-Projekt initialisiert:
 
 \begin{lstlisting}
 cd path/to/project/project
@@ -218,7 +218,7 @@ Hinweis: der \textit{.git}-Ordner, welcher hier ausgegeben wird, ist auf macOS e
 
 \subsubsection{\textit{add}-Befehl}
 
-Wenn nun ein File geschrieben wird (alle möglichen Files mit Text sind meines Wissens nach denkbar), wird dieses vorerst lokal im File system gespeichert (vgl. Abbildung \ref{abb:areas}). Um dieses File später dem Git-Verzeichnis hinzu fügen zu können, muss dieses File vorerst in die \textit{staging area} übertragen werden (Abbildung \ref{abb:areas}; im Tutorial, von welchem ich hier viele Infos übernehme, heisst dieses Level \textit{staging area}, keine Ahnung, ob dies ein allgemein gülitger Begriff ist). Folglich werden später nicht alle Files, welche im ursprünglichen Verzeichnis (hier: \textit{Git$\_$Tutorial}) gespeichert sind, im \textit{commit}-Schritt (Kapitel \ref{ch:commit}) ins Git-Verzeichnis übertragen.
+Wenn nun ein File geschrieben wird (alle möglichen Text-Files sind meines Wissens nach versionierbar), wird dieses vorerst lokal im File-System gespeichert (vgl. Abbildung \ref{abb:areas}). Um dieses File später dem Git-Verzeichnis hinzu fügen zu können, muss dieses File vorerst in die \textit{staging area} übertragen werden (Abbildung \ref{abb:areas}; im Tutorial, von welchem ich hier viele Infos übernehme, heisst dieses Level \textit{staging area}, keine Ahnung, ob dies ein allgemein gülitger Begriff ist). Folglich werden später nicht alle Files, welche im ursprünglichen Ordner (hier: \textit{Git$\_$Tutorial}) gespeichert sind, im \textit{commit}-Schritt (Kapitel \ref{ch:commit}) ins Git-Verzeichnis übertragen.
 
 \begin{figure*}[!tbph]
 \makebox[\textwidth][c]{\begin{minipage}[c]{\textwidth}
@@ -349,7 +349,7 @@ Hat jemand anderes ein File im Repo auf dem Server verändert, muss die aktuelle
 git pull
 \end{lstlisting}
 
-Allerdings konnte ich dies noch nicht austesten, da ich ja bisher immer nur alleine an den Projekten gearbeitet habe...
+Allerdings konnte ich dies noch nicht austesten, da ich ja bisher immer nur alleine an den Projekten gearbeitet habe... Ich bin auch nicht ganz sicher, ob damit das lokale File überschrieben wird oder ob lediglich das File in der staging-area auf den neusten Stand gebracht wird.
 
 
 \subsection{Weiteres Vorgehen}
